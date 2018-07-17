@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Teste</h1>
+<input type="text" name="news" id="news"/>
+<input type="button" id="send" value="Enviar"/>
+<select id="model"> Modelo <option value="unigramas">Unigramas</option> <option value="pos">Part of Speech</option>  </select>
+<p id='answer'></p>
+{% endblock %}
+
+
+{% block javascript %}
+<script>
+	$("#send").click(() => {
+		//Gets the text value from news
+		var text = $("#news").val();
+		//Gets selected model
+		var model = $("#model").val();
+		//sets answer to processing
+		$('#answer').html('processing...');
+		//fires a AJAX call
+		$.ajax({
+			url: '{% url "classifier:check" %}',
+			data: {'text': text, 'model': model},
+			dataType: 'json'
+		})
+		//when the call is done, alters the 
+		.done((data) => {
+			$('#answer').html(data.result);
+		});
+	});
+</script>
+{% endblock %}
