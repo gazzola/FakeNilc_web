@@ -1,23 +1,84 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Teste</h1>
-<input type="text" name="news" id="news"/>
-<input type="button" id="send" value="Enviar"/>
-<select id="model"> Modelo <option value="unigramas">Unigramas</option> <option value="pos">Part of Speech</option>  </select>
-<p id='answer'></p>
+<div class="container">
+
+	<div class="center-align"> 
+		<h3>Detector de Fake News</h3>
+		<hr>
+	</div>
+
+	<div class="row">
+		<h5 class='col s12 m10 l6 offset-l3 offset-m1'>Como funciona?</h5>
+		<p class='col s12 m10 l6 offset-l3 offset-m1' style='text-align:justify'> Insira o corpo de uma notícia na caixa abaixo e clique em "Enviar". O sistema irá utilizar o modelo de detecção selecionado para avaliar se a notícia é verdadeira ou falsa.</p>
+	</div>
+
+	<div class="row">
+		<div class="col s12 m10 l6 offset-l3 offset-m1">
+			<textarea placeholder="Insira sua notícia aqui" id="news" class="materialize-textarea"></textarea>
+			<label for="news">Notícia</label>
+		</div>
+	</div>
+
+	<div class="row"> 
+		<div class="input-field col s6 m5 l3 offset-l3 offset-m1">
+			<select id="model">
+				<option value="unigramas">Unigramas</option>
+				<option value="pos">Part of Speech</option> 
+			</select>
+			<label for="model">Modelo de Detecção</label>
+		</div>
+
+		<div class="input-field  col s6 m5 l3 offset-l1 offset-m1">
+			<button id="send" class="btn waves-effect waves-light" type="submit" name="action">Enviar
+	    		<i class="material-icons right">send</i>
+	  		</button>
+		</div>
+	</div>
+
+	<div id="result"style="display:none">
+		<div class="row">
+			<div class="col s12 m10 l6 offset-l3 offset-m1">
+				<h5>Resultado:</h5> 
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col s12 m10 l6 offset-l3 offset-m1">
+				<div id="progress-bar" class="progress">
+					Processando...
+		      		<div class="indeterminate"></div>
+		 		 </div>
+		 		 <p id="answer" class="flow-text"></p>
+			</div>
+		</div> 
+
+	</div>
+
+</div>
+
 {% endblock %}
 
 
 {% block javascript %}
 <script>
+	  $(document).ready(function(){
+	    $('select').formSelect();
+	  });
+
 	$("#send").click(() => {
 		//Gets the text value from news
 		var text = $("#news").val();
+		if(text == "") {
+			alert("Por favor, insira uma notícia")
+			return
+		}
 		//Gets selected model
 		var model = $("#model").val();
 		//sets answer to processing
-		$('#answer').html('processing...');
+		$('#result').css("display","block");
+		$('#progress-bar').css("display","block");
+		$('#answer').css("display","none");
 		//fires a AJAX call
 		$.ajax({
 			url: '{% url "classifier:check" %}',
@@ -26,7 +87,11 @@
 		})
 		//when the call is done, alters the 
 		.done((data) => {
-			$('#answer').html(data.result);
+			answer = data.result == "FAKE"? "Essa notícia é falsa. <i class='em em-cry'></i>" : "Essa notícia é verdadeira! <i class='em em-smiley'></i>";
+
+			$('#answer').html(answer);
+			$('#progress-bar').css("display","none");
+			$('#answer').css("display","block");
 		});
 	});
 </script>
