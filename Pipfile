@@ -12,6 +12,8 @@ nltk = "*"
 pandas = "*"
 nlpnet = "*"
 "h5py" = "*"
+django-heroku = "*"
+gunicorn = "*"
 
 [dev-packages]
 
