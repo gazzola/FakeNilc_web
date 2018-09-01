@@ -27,5 +27,9 @@ def check(request):
 	return JsonResponse(data)
 
 
-def index(request):
-    return render(request, 'index.html', {'resultado': False})	
+def classif(request):
+    return render(request, 'classif.html', {'resultado': False})	
+
+
+def about(request):
+	return render(request, 'about.html')	

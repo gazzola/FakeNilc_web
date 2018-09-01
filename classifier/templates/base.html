@@ -16,14 +16,16 @@
     {% block stylesheet %}{% endblock %}
   </head>
   <body>
-    <header>
-    </header>
+
+    {% include "header.html" %}
+
     <main>
       {% block content %}
       {% endblock %}
     </main>
-    <footer>
-    </footer>
+
+    {% include "footer.html" %}
+
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
     <script src="{% static 'js/app.js' %}"></script>

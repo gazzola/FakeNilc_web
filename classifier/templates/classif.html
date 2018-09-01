@@ -4,13 +4,13 @@
 <div class="container">
 
 	<div class="center-align"> 
-		<h3>Detector de Fake News</h3>
+		<h3 id="teste">Detector de Fake News</h3>
 		<hr>
 	</div>
 
 	<div class="row">
 		<h5 class='col s12 m10 l6 offset-l3 offset-m1'>Como funciona?</h5>
-		<p class='col s12 m10 l6 offset-l3 offset-m1' style='text-align:justify'> Insira o corpo de uma notícia na caixa abaixo e clique em "Enviar". O sistema irá utilizar o modelo de detecção selecionado para avaliar se a notícia é verdadeira ou falsa.</p>
+		<p class='col s12 m10 l6 offset-l3 offset-m1'> Insira o corpo de uma notícia na caixa abaixo e clique em "Enviar". O sistema irá utilizar o modelo de detecção selecionado para avaliar se a notícia é verdadeira ou falsa.</p>
 	</div>
 
 	<div class="row">
@@ -23,8 +23,8 @@
 	<div class="row"> 
 		<div class="input-field col s6 m5 l3 offset-l3 offset-m1">
 			<select id="model">
-				<option value="unigramas">Unigramas</option>
-				<option value="pos">Part of Speech</option> 
+				<option value="unigramas">Bag of Words</option>
+				<option value="pos">Classes Gramaticais</option> 
 			</select>
 			<label for="model">Modelo de Detecção</label>
 		</div>
@@ -57,20 +57,39 @@
 
 </div>
 
+<!--modal called when user press submit without any text -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+      <h4>Notícia vazia</h4>
+      <p>Nenhuma notícia foi inserida no campo de texto. Por favor, insira uma notícia.</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#news" class="modal-close waves-effect waves-green btn-flat">Ok</a>
+    </div>
+</div>
+
 {% endblock %}
 
 
 {% block javascript %}
 <script>
-	  $(document).ready(function(){
-	    $('select').formSelect();
-	  });
+
+	//Inicializando dropdown
+	$(document).ready(function(){
+	   $('select').formSelect();
+	});
+
+	//Inicializando modal
+	$(document).ready(function(){
+    	$('.modal').modal();
+  	});
+
 
 	$("#send").click(() => {
 		//Gets the text value from news
 		var text = $("#news").val();
 		if(text == "") {
-			alert("Por favor, insira uma notícia")
+			$('.modal').modal('open');
 			return
 		}
 		//Gets selected model
