@@ -1,0 +1,42 @@
+/*MAIN COLOR*/
+:root {
+	--main-color: #0d47a1;
+}
+
+.secondary-content>.material-icons , .input-field , .input-field>.material-icons , .input-field>label , .dropdown-content>li>a {
+	color: var(--main-color) !important;
+}
+
+.nav-wrapper , .btn , .page-footer , .btn-floating , .tabs , .tab a.active , .indicator{
+	background-color: var(--main-color) !important
+}
+
+.dropdown-content li>a, .dropdown-content li>span {
+	color: var(--main-color) !important
+}
+
+input:not([type]):focus:not([readonly])+label, input[type=text]:not(.browser-default):focus:not([readonly])+label, input[type=password]:not(.browser-default):focus:not([readonly])+label, input[type=email]:not(.browser-default):focus:not([readonly])+label, input[type=url]:not(.browser-default):focus:not([readonly])+label, input[type=time]:not(.browser-default):focus:not([readonly])+label, input[type=date]:not(.browser-default):focus:not([readonly])+label, input[type=datetime]:not(.browser-default):focus:not([readonly])+label, input[type=datetime-local]:not(.browser-default):focus:not([readonly])+label, input[type=tel]:not(.browser-default):focus:not([readonly])+label, input[type=number]:not(.browser-default):focus:not([readonly])+label, input[type=search]:not(.browser-default):focus:not([readonly])+label, textarea.materialize-textarea:focus:not([readonly])+label{
+	color: var(--main-color) !important
+}
+
+input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):focus:not([readonly]), input[type=password]:not(.browser-default):focus:not([readonly]), input[type=email]:not(.browser-default):focus:not([readonly]), input[type=url]:not(.browser-default):focus:not([readonly]), input[type=time]:not(.browser-default):focus:not([readonly]), input[type=date]:not(.browser-default):focus:not([readonly]), input[type=datetime]:not(.browser-default):focus:not([readonly]), input[type=datetime-local]:not(.browser-default):focus:not([readonly]), input[type=tel]:not(.browser-default):focus:not([readonly]), input[type=number]:not(.browser-default):focus:not([readonly]), input[type=search]:not(.browser-default):focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+	border-bottom: 1px solid var(--main-color) !important;
+	box-shadow: 0 1px 0 0 var(--main-color) !important;
+}
+
+/*GENERAL CSS*/
+p {
+	text-align: justify;
+}
+
+
+/*STICKY FOOTER*/
+body {
+	display: flex;
+	min-height: 100vh;
+flex-direction: column;
+}
+
+main {
+	flex: 1 0 auto;
+}
