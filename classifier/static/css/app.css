@@ -24,9 +24,19 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
 	box-shadow: 0 1px 0 0 var(--main-color) !important;
 }
 
+
 /*GENERAL CSS*/
 p {
 	text-align: justify;
+}
+
+.no-margin-row {
+	margin-bottom: 0px;
+}
+
+.thumb-logo {
+	max-width: 100%;
+	margin-bottom: 30px;
 }
 
 
