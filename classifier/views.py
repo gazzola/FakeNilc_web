@@ -21,6 +21,7 @@ pos_clf = joblib.load('var/linearsvc_pos.pkl')
 def check(request):
 	text = request.POST['text']
 	model = request.POST['model']
+	data = {}
 
 	# vectorizing received text
 	if(model == 'pos'):
@@ -32,7 +33,7 @@ def check(request):
 
 	# predicting
 	#returning a response with prediction result
-	data = {'result': res[0]}
+	data['result'] = res[0]
 	return JsonResponse(data)
 
 

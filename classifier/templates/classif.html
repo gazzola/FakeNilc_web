@@ -53,6 +53,7 @@
 		      		<div class="indeterminate"></div>
 		 		 </div>
 		 		 <p id="answer" class="flow-text"></p>
+		 		 <p id="error" class="flow-text" style="display:none"><i class="em em-no_entry_sign"></i> Um erro ocorreu! <i class="em em-no_entry_sign"></i></p>
 			</div>
 		</div> 
 
@@ -130,6 +131,7 @@
 		$('#result').css("display","block");
 		$('#progress-bar').css("display","block");
 		$('#answer').css("display","none");
+		$('#error').css("display","none");
 		//fires a AJAX call
 		$.post({
 			url: '{% url "classifier:check" %}',
@@ -143,6 +145,10 @@
 			$('#answer').html(answer);
 			$('#progress-bar').css("display","none");
 			$('#answer').css("display","block");
+		})
+		.fail((xhr) => {
+			$('#progress-bar').css("display","none");
+			$('#error').css("display","block");
 		});
 	});
 </script>
