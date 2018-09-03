@@ -13,30 +13,33 @@
 		<p class='col s12 m10 l6 offset-l3 offset-m1'> Insira o corpo de uma notícia na caixa abaixo e clique em "Enviar". O sistema irá utilizar o modelo de detecção selecionado para avaliar se a notícia é verdadeira ou falsa.</p>
 	</div>
 
-	<div class="row">
-		<div class="col s12 m10 l6 offset-l3 offset-m1">
-			<textarea placeholder="Insira sua notícia aqui" id="news" class="materialize-textarea"></textarea>
-			<label for="news">Notícia</label>
-		</div>
-	</div>
-
-	<div class="row"> 
-		<div class="input-field col s6 m5 l3 offset-l3 offset-m1">
-			<select id="model">
-				<option value="unigramas">Bag of Words</option>
-				<option value="pos">Classes Gramaticais</option> 
-			</select>
-			<label for="model">Modelo de Detecção</label>
+	<form action="" id="news-form">
+		{% csrf_token %}
+		<div class="row">
+			<div class="col s12 m10 l6 offset-l3 offset-m1">
+				<textarea placeholder="Insira sua notícia aqui" id="news" class="materialize-textarea"></textarea>
+				<label for="news">Notícia</label>
+			</div>
 		</div>
 
-		<div class="input-field  col s6 m5 l3 offset-l1 offset-m1">
-			<button id="send" class="btn waves-effect waves-light" type="submit" name="action">Enviar
-	    		<i class="material-icons right">send</i>
-	  		</button>
-		</div>
-	</div>
+		<div class="row"> 
+			<div class="input-field col s6 m5 l3 offset-l3 offset-m1">
+				<select id="model">
+					<option value="unigramas">Bag of Words</option>
+					<option value="pos">Classes Gramaticais</option> 
+				</select>
+				<label for="model">Modelo de Detecção</label>
+			</div>
 
-	<div id="result"style="display:none">
+			<div class="input-field  col s6 m5 l3 offset-l1 offset-m1">
+				<button id="send" class="btn waves-effect waves-light" type="submit" name="action">Enviar
+		    		<i class="material-icons right">send</i>
+		  		</button>
+			</div>
+		</div>
+	</form>
+
+	<div id="result" style="display:none">
 		<div class="row">
 			<div class="col s12 m10 l6 offset-l3 offset-m1">
 				<h5>Resultado:</h5> 
@@ -74,6 +77,35 @@
 {% block javascript %}
 <script>
 
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    var csrftoken = getCookie('csrftoken');
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+
 	//Inicializando dropdown
 	$(document).ready(function(){
 	   $('select').formSelect();
@@ -84,8 +116,8 @@
     	$('.modal').modal();
   	});
 
-
-	$("#send").click(() => {
+	$('#news-form').on('submit', (event) => {
+		event.preventDefault();
 		//Gets the text value from news
 		var text = $("#news").val();
 		if(text == "") {
@@ -99,9 +131,9 @@
 		$('#progress-bar').css("display","block");
 		$('#answer').css("display","none");
 		//fires a AJAX call
-		$.ajax({
+		$.post({
 			url: '{% url "classifier:check" %}',
-			data: {'text': text, 'model': model},
+			data: {'text': text,'model': model},
 			dataType: 'json'
 		})
 		//when the call is done, alters the 
