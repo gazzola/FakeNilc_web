@@ -5,9 +5,16 @@ from preprocess import bow, pos
 from sklearn.svm import LinearSVC
 from sklearn.externals import joblib
 
+#supress some warnings about type conversion
+import warnings
+with warnings.catch_warnings():
+	warnings.filterwarnings("ignore",category=FutureWarning)
+	from nlpnet import POSTagger
+
 vocabulary = joblib.load('var/vocabulary.pkl')
 uni_clf = joblib.load('var/linearsvc_unigram-binary.pkl')
 pos_clf = joblib.load('var/linearsvc_pos.pkl')
+tagger = POSTagger(r'var/nlpnet', language='pt')
 
 def check(request):
 	text = request.GET['text']
@@ -15,7 +22,7 @@ def check(request):
 
 	# vectorizing received text
 	if(model == 'pos'):
-		vec = pos.vectorize(text)
+		vec = pos.vectorize(text, tagger)
 		res = pos_clf.predict(vec.values)
 	else:
 		vec = bow.vectorize(text,vocabulary[:-1])
