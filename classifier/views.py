@@ -23,7 +23,7 @@ def check(request):
 
 	# vectorizing received text
 	if(model == 'pos'):
-		vec = pos.vectorize(text, )
+		vec = pos.vectorize(text, tagger)
 		res = pos_clf.predict(vec.values)
 	else:
 		vec = bow.vectorize(text,vocabulary[:-1])
