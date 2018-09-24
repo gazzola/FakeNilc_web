@@ -3,10 +3,23 @@
 {% block content %}
 <div class="container">
 
+
 	<div class="center-align"> 
 		<h3>Sobre o Projeto</h3>
 		<hr>
 	</div>
+
+	<div class="row">
+		<h5 class='col s12 m12 l6 offset-l3'>Como funciona?</h5><br>
+	</div>
+	<div class="row">
+		<p class='col s12 m12 l6 offset-l3'> Ao receber um texto, o sistema aplica métodos para extrair atributos linguísticos desse texto e os utiliza em um modelo de aprendizado de máquina, que classifica a notícia como verdadeira ou falsa. Os modelos disponibilizados foram treinados com o córpus <a href='https://github.com/roneysco/Fake.br-Corpus'><b>Fake.Br</b></a>. </p> 
+		<p class='col s12 m12 l6 offset-l3'>Estão disponíveis dois modelos de detecção: "Frequência de Palavras" e "Classes Gramaticais". O modelo de frequência de palavras utiliza uma representação <i>Bag of Words</i> do texto, onde a presença ou ausência de uma palavra é marcada como 0 ou 1 em um vetor com 10395 posições (relativas às palavras mais importantes do córpus). O modelo de classes gramaticais calcula a porcentagem de palavras pertencentes à cada classe sintática, de acordo com o <i>tagger</i> <a href='http://nilc.icmc.usp.br/nlpnet/'>nlpnet</a>. 
+		</p>
+		<p class='col s12 m12 l6 offset-l3'> Os atributos extraídos do texto são aplicados em um classificador <i>Support Vector Machine</i>, que infere a <i>classe</i> da notícia (verdadeira ou falsa). Nos testes realizados, o sistema obteve cerca de 88% de acerto (acurácia geral). Porém, sendo esse sistema apenas uma prova de conceito, não é recomendado o uso do FakeCheck como única fonte de verificação de notícias. <b> Busque fontes confiáveis para todas as notícias que você ler/compartilhar na web!</b>
+		</p>
+	</div>
+
 
 
 	<div class="row">
@@ -41,23 +54,19 @@
 		</p>
 	</div>
 
+	<div class="row">
+		<h5 class='col s12 m12 l6 offset-l3'>Agradecimentos</h6>
+	</div>
+	<div class="row no-margin-row">
+		<p class='col s12 m12 l6 offset-l3'> 
+			Ao Murilo Gazzola, por criar o bot do WhatsApp.
+		</p>
+	</div>
+
 
 	<div class="row">
 		<h5 class='col s12 m12 l6 offset-l3'>Financiamento e Apoio</h5>
 		<p class='col s12 m12 l6 offset-l3'>Este projeto foi desenvolvido no Instituto de Ciências Matemáticas e de Computação da Universidade de São Paulo (ICMC-USP), no campus São Carlos. O projeto foi financiado pelo Programa Institucional de Bolsas de Iniciação Científica (PIBIC) do CNPq e foi desenvolvido com o apoio do Núcleo Interinstitucional de Linguística Computacional (NILC)..</p>
-	</div>
-	<div class="row">
-		<div class='col s12'>
-		</div>
-		<div class='col s12 m4 l2 offset-l3'>
-			<a href='http://cnpq.br/pibic'><img class='thumb-logo' src='https://logodownload.org/wp-content/uploads/2016/10/cnpq-logo-7.png'></img></a>
-		</div>
-		<div class='col s12 m4 l2'>
-			<a href='http://icmc.usp.br'><img class='thumb-logo' src='https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Webysther_20170627_-_Logo_ICMC-USP.svg/1280px-Webysther_20170627_-_Logo_ICMC-USP.svg.png'></img></a>
-		</div>
-		<div class='col s12 m4 l2'>
-			<a href='http://www.nilc.icmc.usp.br'><img class='thumb-logo' src='http://www.nilc.icmc.usp.br/nilc/templates/nilc/images/logotipo.png'></img></a>
-		</div>
 	</div>
 
 </div>

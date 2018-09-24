@@ -10,14 +10,14 @@
 
 	<div class="row">
 		<h5 class='col s12 m10 l6 offset-l3 offset-m1'>Como funciona?</h5>
-		<p class='col s12 m10 l6 offset-l3 offset-m1'> Insira o corpo de uma notícia na caixa abaixo e clique em "Enviar". O sistema irá utilizar o modelo de detecção selecionado para avaliar se a notícia é verdadeira ou falsa.</p>
+		<p class='col s12 m10 l6 offset-l3 offset-m1'> <b>Copie o texto de uma notícia, cole na caixa abaixo e clique em "Enviar".</b> O sistema irá processar o texto para identificar características de escrita, como palavras usadas ou classes gramaticais mais frequentes, e utilizar essas características em um modelo de aprendizado de máquina que classificará a notícia em verdadeira ou falsa. Para mais informações sobre como o sistema funciona, clique <a href="{% url 'classifier:about' %}">aqui</a>. Você também pode utilizar o nosso <a href="https://otwoo.app/nilc-fakenews">bot do WhatsApp</a>.</p>
 	</div>
 
 	<form action="" id="news-form">
 		{% csrf_token %}
 		<div class="row">
 			<div class="col s12 m10 l6 offset-l3 offset-m1">
-				<textarea placeholder="Insira sua notícia aqui" id="news" class="materialize-textarea"></textarea>
+				<textarea placeholder="Insira o texto da sua notícia aqui." id="news" class="materialize-textarea"></textarea>
 				<label for="news">Notícia</label>
 			</div>
 		</div>
@@ -25,7 +25,7 @@
 		<div class="row"> 
 			<div class="input-field col s6 m5 l3 offset-l3 offset-m1">
 				<select id="model">
-					<option value="unigramas">Bag of Words</option>
+					<option value="unigramas">Frequência de Palavras</option>
 					<option value="pos">Classes Gramaticais</option> 
 				</select>
 				<label for="model">Modelo de Detecção</label>
