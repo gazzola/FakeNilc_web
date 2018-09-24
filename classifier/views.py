@@ -1,6 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
+from django.views.decorators.csrf import csrf_exempt
 
 from preprocess import bow, pos
 from sklearn.svm import LinearSVC
@@ -17,6 +18,7 @@ vocabulary = joblib.load('var/vocabulary.pkl')
 uni_clf = joblib.load('var/linearsvc_unigram-binary.pkl')
 pos_clf = joblib.load('var/linearsvc_pos.pkl')
 
+@csrf_exempt
 @require_http_methods(['POST'])
 def check(request):
 	text = request.POST['text']
