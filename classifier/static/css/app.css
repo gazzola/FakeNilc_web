@@ -35,7 +35,11 @@ p {
 }
 
 .thumb-logo {
-	max-width: 100%;
+	max-width: 70%;
+}
+
+.thumb-logo-margin {
+	max-width: 70%;
 	margin-bottom: 30px;
 }
 
