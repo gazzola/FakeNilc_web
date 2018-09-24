@@ -15,6 +15,7 @@ with warnings.catch_warnings():
 tagger = POSTagger(r'var/nlpnet', language='pt')
 
 vocabulary = joblib.load('var/vocabulary.pkl')
+print(len(vocabulary))
 uni_clf = joblib.load('var/linearsvc_unigram-binary.pkl')
 pos_clf = joblib.load('var/linearsvc_pos.pkl')
 
