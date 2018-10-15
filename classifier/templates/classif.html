@@ -11,6 +11,7 @@
 	<div class="row">
 		<h5 class='col s12 m10 l6 offset-l3 offset-m1'>Como funciona?</h5>
 		<p class='col s12 m10 l6 offset-l3 offset-m1'> <b>Copie o texto de uma notícia, cole na caixa abaixo e clique em "Enviar".</b> O sistema irá processar o texto para identificar características de escrita, como palavras usadas ou classes gramaticais mais frequentes, e utilizar essas características em um modelo de aprendizado de máquina que classificará a notícia em verdadeira ou falsa. Para mais informações sobre como o sistema funciona, clique <a href="{% url 'classifier:about' %}">aqui</a>. Você também pode utilizar o nosso <a href="https://otwoo.app/nilc-fakenews">bot do WhatsApp</a>.</p>
+		<p class='col s12 m10 l6 offset-l3 offset-m1'> <b>ATENÇÃO: Utilize o texto completo da notícia!</b> O sistema não funciona corretamente com apenas trechos ou manchetes de notícias.
 	</div>
 
 	<form action="" id="news-form">
@@ -140,7 +141,7 @@
 		})
 		//when the call is done, alters the 
 		.done((data) => {
-			answer = data.result == "FAKE"? "Essa notícia é falsa. <i class='em em-cry'></i>" : "Essa notícia é verdadeira! <i class='em em-smiley'></i>";
+			answer = data.result == "FAKE"? "Essa notícia pode ser falsa. <i class='em em-cry'></i> Busque fontes confiáveis." : "Essa notícia parece ser verdadeira! <i class='em em-smiley'></i> Busque fontes confiáveis antes de divulgá-la.";
 
 			$('#answer').html(answer);
 			$('#progress-bar').css("display","none");
